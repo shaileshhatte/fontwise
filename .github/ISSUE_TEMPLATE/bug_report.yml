@@ -1,0 +1,78 @@
+name: Bug report
+description: Something on a page or in the popup does not work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a problem. Please do not include personal data.
+        **Security issues:** follow [SECURITY.md](https://github.com/shaileshhatte/fontwise/blob/main/SECURITY.md) instead of opening an issue.
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        [
+          Chrome,
+          Edge,
+          Brave,
+          Opera / Vivaldi / other Chromium,
+          Firefox,
+          Firefox for Android,
+        ]
+    validations:
+      required: true
+
+  - type: input
+    id: browser-version
+    attributes:
+      label: Browser version
+      placeholder: e.g. 131.0.6778.85
+    validations:
+      required: true
+
+  - type: input
+    id: extension-version
+    attributes:
+      label: Fontwise version
+      description: Shown on chrome://extensions or about:addons
+      placeholder: e.g. 1.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: Page URL
+      description: A public page where the problem happens (if possible)
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: behaviour
+    attributes:
+      label: Expected and actual behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: settings
+    attributes:
+      label: Settings in use
+      description: Font, preset, theme or controls you changed
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Screenshots or console errors
+      description: Popup → right-click → Inspect, or the page's DevTools console

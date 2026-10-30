@@ -1,0 +1,51 @@
+{
+    "name": "fontwise",
+    "private": true,
+    "description": "Browser extension (Chrome, Firefox, Edge) that makes any web page easier to read: readable fonts, spacing, colours, presets, Focus mode and a reading ruler.",
+    "license": "MIT",
+    "author": "Shailesh Hatte",
+    "homepage": "https://github.com/shaileshhatte/fontwise#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/shaileshhatte/fontwise.git"
+    },
+    "bugs": {
+        "url": "https://github.com/shaileshhatte/fontwise/issues"
+    },
+    "type": "module",
+    "engines": {
+        "node": ">=20.19"
+    },
+    "scripts": {
+        "lint": "npm run lint:js && npm run lint:ext",
+        "lint:js": "eslint .",
+        "lint:ext": "web-ext lint",
+        "test": "node --test",
+        "test:e2e": "playwright test",
+        "vendor": "node tools/vendor-assets.mjs",
+    "screenshots": "node tools/store-screenshots.mjs",
+        "start:firefox": "web-ext run --target firefox-desktop",
+        "start:chrome": "web-ext run --target chromium",
+        "build": "web-ext build"
+    },
+    "webExt": {
+        "sourceDir": "extension",
+        "artifactsDir": "dist",
+        "build": {
+            "filename": "fontwise-{version}.zip",
+            "overwriteDest": true
+        }
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@fontsource-variable/lexend": "^5.3.0",
+        "@fontsource-variable/literata": "^5.3.0",
+        "@fontsource/atkinson-hyperlegible": "^5.3.0",
+        "@fontsource/opendyslexic": "^5.3.0",
+        "@mozilla/readability": "^0.6.0",
+        "@playwright/test": "^1.64.1",
+        "eslint": "^10.13.0",
+        "globals": "^17.13.0",
+        "web-ext": "^10.8.0"
+    }
+}

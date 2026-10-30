@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title data-i18n="extName">Fontwise</title>
+        <link rel="stylesheet" href="../shared/tokens.css" />
+        <link rel="stylesheet" href="popup.css" />
+    </head>
+
+    <body>
+        <div class="shell">
+            <header class="header">
+                <div class="header-icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 7 4 4 20 4 20 7" />
+                        <line x1="9" y1="20" x2="15" y2="20" />
+                        <line x1="12" y1="4" x2="12" y2="20" />
+                    </svg>
+                </div>
+                <div class="header-text">
+                    <h1 class="header-title" data-i18n="extName">Fontwise</h1>
+                    <p id="header-sub" class="header-sub" data-i18n="popupSubtitle">Reading settings</p>
+                </div>
+                <button type="button" id="btn-focus" class="icon-btn" data-i18n-title="focusModeTitle"
+                    data-i18n-label="focusMode" data-lockable>
+                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z" />
+                        <path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z" />
+                    </svg>
+                </button>
+                <button type="button" id="btn-options" class="icon-btn" data-i18n-title="openSettings"
+                    data-i18n-label="openSettings">
+                    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                    </svg>
+                </button>
+                <label class="switch" data-i18n-title="enableChanges" data-lockable>
+                    <input id="toggle-enabled" type="checkbox" role="switch" data-i18n-label="enableChanges" checked />
+                    <span class="switch-track" aria-hidden="true"></span>
+                </label>
+            </header>
+
+            <div class="scope-bar" data-lockable>
+                <div id="scope" class="scope" role="radiogroup" data-i18n-label="scopeLabel">
+                    <button type="button" role="radio" data-scope="tab" aria-checked="false"
+                        aria-describedby="scope-hint" data-i18n="scopeTab">This tab</button>
+                    <button type="button" role="radio" data-scope="site" aria-checked="false"
+                        aria-describedby="scope-hint" data-i18n="scopeSite">This site</button>
+                    <button type="button" role="radio" data-scope="global" aria-checked="false"
+                        aria-describedby="scope-hint" data-i18n="scopeGlobal">Everywhere</button>
+                </div>
+                <button type="button" id="btn-reset" class="reset-btn">
+                    <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                        <path d="M3 3v5h5" />
+                    </svg>
+                    <span data-i18n="reset">Reset</span>
+                </button>
+            </div>
+            <p id="scope-hint" class="visually-hidden"></p>
+
+            <div id="active-bar" class="collapsible collapsed">
+                <div class="active-bar">
+                    <span class="active-dot" aria-hidden="true"></span>
+                    <span id="active-label" class="active-label"></span>
+                </div>
+            </div>
+
+            <div id="notice" class="notice" role="alert" hidden>
+                <span id="notice-text" class="notice-text"></span>
+                <button type="button" id="btn-grant" class="notice-btn" data-i18n="noticeGrant" hidden>Allow
+                    access</button>
+            </div>
+
+            <section class="presets" data-i18n-label="presetsLabel" data-lockable>
+                <div id="presets" class="preset-row">
+                    <button type="button" class="preset-primary" data-preset="best" data-i18n-title="presetBestTitle">
+                        <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9z" />
+                            <path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z" />
+                        </svg>
+                        <span data-i18n="presetBest">Best for reading</span>
+                    </button>
+                    <button type="button" class="chip" data-preset="dyslexia" data-i18n="presetDyslexia"
+                        data-i18n-title="presetDyslexiaTitle">Dyslexia-friendly</button>
+                    <button type="button" class="chip" data-preset="night" data-i18n="presetNight"
+                        data-i18n-title="presetNightTitle">Night reading</button>
+                </div>
+                <div class="custom-row">
+                    <div id="custom-presets" class="custom-presets scroll-x" role="group" data-i18n-label="myPresets">
+                    </div>
+                    <button type="button" id="btn-save-preset" class="chip chip-add" aria-expanded="false"
+                        aria-controls="save-form" data-i18n-title="savePresetTitle">
+                        <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+                            <line x1="12" y1="5" x2="12" y2="19" />
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                        <span data-i18n="savePreset">Save current</span>
+                    </button>
+                </div>
+                <form id="save-form" class="save-form" hidden>
+                    <input id="preset-name" class="text-input" type="text" maxlength="40" required autocomplete="off"
+                        spellcheck="false" data-i18n-placeholder="presetNamePlaceholder"
+                        data-i18n-label="presetNameLabel" />
+                    <button type="submit" class="btn btn-primary" data-i18n="save">Save</button>
+                    <button type="button" id="btn-cancel-preset" class="btn" data-i18n="cancel">Cancel</button>
+                </form>
+            </section>
+
+            <div id="view-tabs" class="views" role="tablist" data-i18n-label="viewsLabel">
+                <button type="button" id="tab-fonts" class="view-btn" role="tab" aria-selected="true"
+                    aria-controls="view-fonts" data-view="fonts" data-i18n="viewFonts">Fonts</button>
+                <button type="button" id="tab-reading" class="view-btn" role="tab" aria-selected="false"
+                    aria-controls="view-reading" data-view="reading" tabindex="-1"
+                    data-i18n="viewReading">Reading</button>
+                <span class="view-indicator" aria-hidden="true"></span>
+            </div>
+
+            <main class="content" data-lockable>
+                <section id="view-fonts" class="view" role="tabpanel" aria-labelledby="tab-fonts">
+                    <div class="search-wrap">
+                        <svg aria-hidden="true" class="search-icon" width="14" height="14" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg>
+                        <input id="search-input" class="search-input" type="search" autocomplete="off"
+                            spellcheck="false" aria-controls="font-list" aria-keyshortcuts="/"
+                            data-i18n-placeholder="searchFonts" data-i18n-label="searchFontsLabel" />
+                    </div>
+
+                    <div id="cat-tabs" class="tabs" role="radiogroup" data-i18n-label="filterLabel">
+                        <button type="button" class="tab" role="radio" aria-checked="true" data-cat="all"
+                            data-i18n="categoryAll">All</button>
+                        <button type="button" class="tab" role="radio" aria-checked="false" data-cat="sans-serif"
+                            tabindex="-1" data-i18n="categorySans">Sans-serif</button>
+                        <button type="button" class="tab" role="radio" aria-checked="false" data-cat="serif"
+                            tabindex="-1" data-i18n="categorySerif">Serif</button>
+                        <button type="button" class="tab" role="radio" aria-checked="false" data-cat="monospace"
+                            tabindex="-1" data-i18n="categoryMono">Mono</button>
+                    </div>
+
+                    <div id="font-list" class="font-list scroll" role="group" data-i18n-label="fontListLabel"></div>
+                </section>
+
+                <section id="view-reading" class="view view-scroll scroll" role="tabpanel" aria-labelledby="tab-reading"
+                    hidden>
+                    <div class="group" role="group" aria-labelledby="grp-text">
+                        <h2 id="grp-text" class="group-title" data-i18n="groupText">Text</h2>
+
+                        <div class="row" data-row="fontSize">
+                            <div class="row-head">
+                                <label class="row-label" for="ctl-fontSize" data-i18n="fontSize">Font size</label>
+                                <span class="row-value" data-value-for="fontSize" aria-hidden="true"></span>
+                                <button type="button" class="row-reset" data-reset="fontSize"></button>
+                            </div>
+                            <input id="ctl-fontSize" class="range" type="range" min="12" max="28" step="1"
+                                data-key="fontSize" />
+                        </div>
+
+                        <div class="row" data-row="lineHeight">
+                            <div class="row-head">
+                                <label class="row-label" for="ctl-lineHeight" data-i18n="lineHeight">Line
+                                    spacing</label>
+                                <span class="row-value" data-value-for="lineHeight" aria-hidden="true"></span>
+                                <button type="button" class="row-reset" data-reset="lineHeight"></button>
+                            </div>
+                            <input id="ctl-lineHeight" class="range" type="range" min="1" max="2.5" step="0.05"
+                                data-key="lineHeight" />
+                        </div>
+
+                        <div class="row" data-row="letterSpacing">
+                            <div class="row-head">
+                                <label class="row-label" for="ctl-letterSpacing" data-i18n="letterSpacing">Letter
+                                    spacing</label>
+                                <span class="row-value" data-value-for="letterSpacing" aria-hidden="true"></span>
+                                <button type="button" class="row-reset" data-reset="letterSpacing"></button>
+                            </div>
+                            <input id="ctl-letterSpacing" class="range" type="range" min="0" max="0.15" step="0.01"
+                                data-key="letterSpacing" />
+                        </div>
+
+                        <div class="row" data-row="wordSpacing">
+                            <div class="row-head">
+                                <label class="row-label" for="ctl-wordSpacing" data-i18n="wordSpacing">Word
+                                    spacing</label>
+                                <span class="row-value" data-value-for="wordSpacing" aria-hidden="true"></span>
+                                <button type="button" class="row-reset" data-reset="wordSpacing"></button>
+                            </div>
+                            <input id="ctl-wordSpacing" class="range" type="range" min="0" max="0.4" step="0.02"
+                                data-key="wordSpacing" />
+                        </div>
+
+                        <div class="row" data-row="paragraphSpacing">
+                            <div class="row-head">
+                                <label class="row-label" for="ctl-paragraphSpacing"
+                                    data-i18n="paragraphSpacing">Paragraph spacing</label>
+                                <span class="row-value" data-value-for="paragraphSpacing" aria-hidden="true"></span>
+                                <button type="button" class="row-reset" data-reset="paragraphSpacing"></button>
+                            </div>
+                            <input id="ctl-paragraphSpacing" class="range" type="range" min="0" max="3" step="0.1"
+                                data-key="paragraphSpacing" />
+                        </div>
+
+                        <div class="row" data-row="fontWeight">
+                            <div class="row-head">
+                                <span class="row-label" id="lbl-fontWeight" data-i18n="fontWeight">Weight</span>
+                                <button type="button" class="row-reset" data-reset="fontWeight"></button>
+                            </div>
+                            <div class="segmented" role="group" aria-labelledby="lbl-fontWeight" data-key="fontWeight"
+                                data-type="number">
+                                <button type="button" data-value="300" data-i18n="weightLight">Light</button>
+                                <button type="button" data-value="400" data-i18n="weightRegular">Regular</button>
+                                <button type="button" data-value="500" data-i18n="weightMedium">Medium</button>
+                                <button type="button" data-value="600" data-i18n="weightSemibold">Semibold</button>
+                                <button type="button" data-value="700" data-i18n="weightBold">Bold</button>
+                            </div>
+                        </div>
+
+                        <div class="row" data-row="fontStyle">
+                            <div class="row-head">
+                                <span class="row-label" id="lbl-fontStyle" data-i18n="fontStyle">Style</span>
+                                <button type="button" class="row-reset" data-reset="fontStyle"></button>
+                            </div>
+                            <div class="segmented" role="group" aria-labelledby="lbl-fontStyle" data-key="fontStyle">
+                                <button type="button" data-value="normal" data-i18n="styleNormal">Normal</button>
+                                <button type="button" data-value="italic" class="italic"
+                                    data-i18n="styleItalic">Italic</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group" role="group" aria-labelledby="grp-colours">
+                        <h2 id="grp-colours" class="group-title" data-i18n="groupColours">Colours</h2>
+
+                        <div class="row" data-row="theme">
+                            <div class="row-head">
+                                <span class="row-label" id="lbl-theme" data-i18n="theme">Theme</span>
+                                <span class="row-value" data-value-for="theme" aria-hidden="true"></span>
+                                <button type="button" class="row-reset" data-reset="theme"></button>
+                            </div>
+                            <div id="themes" class="swatches" role="group" aria-labelledby="lbl-theme">
+                                <button type="button" class="swatch" data-theme="light"><span
+                                        aria-hidden="true">Aa</span><small data-i18n="themeLight">Light</small></button>
+                                <button type="button" class="swatch" data-theme="sepia"><span
+                                        aria-hidden="true">Aa</span><small data-i18n="themeSepia">Sepia</small></button>
+                                <button type="button" class="swatch" data-theme="dark"><span
+                                        aria-hidden="true">Aa</span><small data-i18n="themeDark">Dark</small></button>
+                                <button type="button" class="swatch" data-theme="contrast"><span
+                                        aria-hidden="true">Aa</span><small
+                                        data-i18n="themeContrast">Contrast</small></button>
+                            </div>
+                        </div>
+
+                        <div class="row" data-row="textColor">
+                            <div class="row-head">
+                                <span class="row-label" id="lbl-textColor" data-i18n="textColor">Text colour</span>
+                            </div>
+                            <div class="palette" role="group" aria-labelledby="lbl-textColor" data-key="textColor">
+                                <input class="color-input" type="color" data-i18n-title="pickColour"
+                                    data-i18n-label="pickTextColour" />
+                            </div>
+                        </div>
+
+                        <div class="row" data-row="bgColor">
+                            <div class="row-head">
+                                <span class="row-label" id="lbl-bgColor" data-i18n="bgColor">Background colour</span>
+                            </div>
+                            <div class="palette" role="group" aria-labelledby="lbl-bgColor" data-key="bgColor">
+                                <input class="color-input" type="color" data-i18n-title="pickColour"
+                                    data-i18n-label="pickBgColour" />
+                            </div>
+                        </div>
+
+                        <p id="contrast" class="contrast" hidden></p>
+                    </div>
+
+                    <div class="group" role="group" aria-labelledby="grp-layout">
+                        <h2 id="grp-layout" class="group-title" data-i18n="groupLayout">Layout</h2>
+
+                        <div class="row" data-row="lineLength">
+                            <div class="row-head">
+                                <label class="row-label" for="ctl-lineLength" data-i18n="lineLength">Line
+                                    length</label>
+                                <span class="row-value" data-value-for="lineLength" aria-hidden="true"></span>
+                                <button type="button" class="row-reset" data-reset="lineLength"></button>
+                            </div>
+                            <input id="ctl-lineLength" class="range" type="range" min="45" max="100" step="5"
+                                data-key="lineLength" />
+                        </div>
+
+                        <div class="row" data-row="marginWidth">
+                            <div class="row-head">
+                                <label class="row-label" for="ctl-marginWidth" data-i18n="marginWidth">Margin
+                                    width</label>
+                                <span class="row-value" data-value-for="marginWidth" aria-hidden="true"></span>
+                                <button type="button" class="row-reset" data-reset="marginWidth"></button>
+                            </div>
+                            <input id="ctl-marginWidth" class="range" type="range" min="0" max="25" step="1"
+                                data-key="marginWidth" />
+                        </div>
+
+                        <div class="row" data-row="textAlign">
+                            <div class="row-head">
+                                <span class="row-label" id="lbl-textAlign" data-i18n="textAlign">Alignment</span>
+                                <button type="button" class="row-reset" data-reset="textAlign"></button>
+                            </div>
+                            <div class="segmented" role="group" aria-labelledby="lbl-textAlign" data-key="textAlign">
+                                <button type="button" data-value="left" data-i18n="alignLeft">Left</button>
+                                <button type="button" data-value="justify" data-i18n="alignJustify">Justify</button>
+                            </div>
+                        </div>
+
+                        <div class="row row-inline">
+                            <label class="row-label" for="toggle-ruler">
+                                <span data-i18n="readingRuler">Reading ruler</span>
+                                <small class="row-hint" data-i18n="readingRulerHint">Dims everything but the lines
+                                    you are reading</small>
+                            </label>
+                            <span class="switch">
+                                <input id="toggle-ruler" type="checkbox" role="switch" />
+                                <span class="switch-track" aria-hidden="true"></span>
+                            </span>
+                        </div>
+
+                        <div class="row row-inline">
+                            <label class="row-label" for="toggle-code" data-i18n="keepCodeMono">Keep code
+                                monospace</label>
+                            <span class="switch">
+                                <input id="toggle-code" type="checkbox" role="switch" />
+                                <span class="switch-track" aria-hidden="true"></span>
+                            </span>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="footer">
+                <span id="footer-note" class="footer-note"></span>
+                <span class="footer-fonts">
+                    <span id="font-count"></span>
+                    <span aria-hidden="true">·</span>
+                    <button type="button" id="btn-rescan" class="link-btn" data-i18n="rescan"
+                        data-i18n-title="rescanTitle">Rescan</button>
+                </span>
+            </footer>
+
+            <div id="status" class="visually-hidden" role="status" aria-live="polite"></div>
+        </div>
+
+        <template id="tpl-empty">
+            <div class="empty-state">
+                <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.5">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <p></p>
+            </div>
+        </template>
+
+        <script src="../shared/bundled-fonts.js"></script>
+        <script src="../shared/settings.js"></script>
+        <script src="../shared/catalog.js"></script>
+        <script src="../shared/css.js"></script>
+        <script src="../shared/store.js"></script>
+        <script src="../shared/i18n.js"></script>
+        <script src="../shared/ui.js"></script>
+        <script src="popup.js"></script>
+    </body>
+
+</html>

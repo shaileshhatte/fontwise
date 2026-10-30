@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title data-i18n="welcomeTitle">Welcome to Fontwise</title>
+        <link rel="icon" href="../icons/32.png" />
+        <link rel="stylesheet" href="../shared/tokens.css" />
+        <link rel="stylesheet" href="../shared/page.css" />
+    </head>
+
+    <body>
+        <a class="skip-link" href="#main" data-i18n="skipToContent">Skip to content</a>
+
+        <main id="main" class="page" tabindex="-1">
+            <header class="hero">
+                <img class="hero-icon" src="../icons/128.png" alt="" width="72" height="72" />
+                <h1 class="hero-title" data-i18n="welcomeTitle">Welcome to Fontwise</h1>
+                <p class="hero-lead" data-i18n="welcomeLead">Make any web page easier to read: a better font,
+                    comfortable spacing and calm colours, in one click.</p>
+            </header>
+
+            <ol class="steps">
+                <li class="step">
+                    <h2 data-i18n="welcomeStep1Title">Pin Fontwise</h2>
+                    <p data-i18n="welcomeStep1">Open the extensions menu (the puzzle icon) and pin Fontwise to the
+                        toolbar.</p>
+                </li>
+                <li class="step">
+                    <h2 data-i18n="welcomeStep2Title">Open any article</h2>
+                    <p data-i18n="welcomeStep2">Click the Fontwise icon and choose “Best for reading”, or pick a font
+                        and tune the details.</p>
+                </li>
+                <li class="step">
+                    <h2 data-i18n="welcomeStep3Title">Choose where it applies</h2>
+                    <p data-i18n="welcomeStep3">Keep changes to this tab, remember them for the site, or use them
+                        everywhere.</p>
+                </li>
+            </ol>
+
+            <section class="card" aria-labelledby="features-title">
+                <h2 id="features-title" class="card-title" data-i18n="welcomeFeatures">What you can do</h2>
+                <ul class="feature-list">
+                    <li data-i18n="welcomeFeatureFonts">Readable fonts you already have, plus Atkinson
+                        Hyperlegible, Lexend, Literata and OpenDyslexic built in</li>
+                    <li data-i18n="welcomeFeatureSpacing">Size, line, letter, word and paragraph spacing</li>
+                    <li data-i18n="welcomeFeatureColours">Light, sepia, dark and high-contrast themes with a
+                        contrast check</li>
+                    <li data-i18n="welcomeFeatureFocus">Focus mode: just the article, nothing else</li>
+                    <li data-i18n="welcomeFeatureRuler">A reading ruler that keeps your place</li>
+                    <li data-i18n="welcomeFeatureDark">Automatic dark colours at night</li>
+                </ul>
+            </section>
+
+            <section class="card" aria-labelledby="shortcuts-title">
+                <h2 id="shortcuts-title" class="card-title" data-i18n="optShortcuts">Keyboard shortcuts</h2>
+                <dl id="shortcut-list" class="shortcuts"></dl>
+            </section>
+
+            <section class="card" aria-labelledby="privacy-title">
+                <h2 id="privacy-title" class="card-title" data-i18n="welcomePrivacyTitle">Private by design</h2>
+                <p class="card-desc" data-i18n="welcomePrivacy">Fontwise makes no network requests and collects no
+                    data. Your settings stay in your browser.</p>
+                <div class="btn-row">
+                    <button type="button" id="btn-options" class="btn btn-primary" data-i18n="openSettings">Open
+                        settings</button>
+                    <a class="btn" href="https://github.com/shaileshhatte/fontwise#readme" target="_blank"
+                        rel="noopener noreferrer" data-i18n="welcomeGuide">Read the guide</a>
+                </div>
+            </section>
+        </main>
+
+        <script src="../shared/i18n.js"></script>
+        <script src="welcome.js"></script>
+    </body>
+
+</html>

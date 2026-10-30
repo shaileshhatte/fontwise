@@ -1,0 +1,25 @@
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Packaging output (never commit store packages or signing keys)
+dist/
+web-ext-artifacts/
+*.zip
+*.xpi
+*.crx
+*.pem
+
+# Tooling
+node_modules/
+npm-debug.log*
+.eslintcache
+test-results/
+playwright-report/
+
+# Local secrets (e.g. AMO / Chrome Web Store API credentials)
+.env
+.env.*

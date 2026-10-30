@@ -1,0 +1,31 @@
+name: Feature request
+description: Suggest a readability feature, font or improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What reading problem would this solve?
+      description: Describe who it helps and in which situation
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+
+  - type: checkboxes
+    id: constraints
+    attributes:
+      label: Constraints
+      options:
+        - label: Works without new browser permissions, or I explained why one is needed
+        - label: Works without network requests (Fontwise never contacts a server)

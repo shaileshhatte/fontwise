@@ -1,0 +1,701 @@
+{
+    "extName": {
+        "message": "Fontwise"
+    },
+    "extFullName": {
+        "message": "Fontwise — Readable Fonts & Reading Mode",
+        "description": "Store and browser listing name. Max 75 characters."
+    },
+    "extDescription": {
+        "message": "Readable fonts, better spacing, calm colours and a distraction-free Focus mode for any web page. No data collected.",
+        "description": "Store listing summary. Max 132 characters."
+    },
+    "badgeOn": {
+        "message": "On",
+        "description": "Toolbar badge when the page is restyled. Max 4 characters."
+    },
+    "cmdOpenPopup": {
+        "message": "Open Fontwise"
+    },
+    "cmdToggle": {
+        "message": "Pause or resume Fontwise on this page"
+    },
+    "cmdBest": {
+        "message": "Apply “Best for reading”"
+    },
+    "cmdFocus": {
+        "message": "Open or close Focus mode"
+    },
+    "popupSubtitle": {
+        "message": "Reading settings"
+    },
+    "focusMode": {
+        "message": "Focus mode"
+    },
+    "focusModeTitle": {
+        "message": "Focus mode: show just the article"
+    },
+    "openSettings": {
+        "message": "Open settings"
+    },
+    "enableChanges": {
+        "message": "Turn Fontwise on or off for this page"
+    },
+    "scopeLabel": {
+        "message": "Apply changes to"
+    },
+    "scopeTab": {
+        "message": "This tab"
+    },
+    "scopeSite": {
+        "message": "This site"
+    },
+    "scopeGlobal": {
+        "message": "Everywhere"
+    },
+    "scopeTabHint": {
+        "message": "Changes apply to this tab until it closes"
+    },
+    "scopeSiteHint": {
+        "message": "Changes are remembered for $1",
+        "description": "$1 is a site name such as example.com"
+    },
+    "scopeGlobalHint": {
+        "message": "Changes apply to every site"
+    },
+    "scopeGlobalExcluded": {
+        "message": "$1 is excluded from Everywhere settings",
+        "description": "$1 is a site name such as example.com"
+    },
+    "scopeSitePrivate": {
+        "message": "Sites are not remembered in private windows"
+    },
+    "scopeSiteUnavailable": {
+        "message": "Not available on this page"
+    },
+    "reset": {
+        "message": "Reset"
+    },
+    "resetTitle_tab": {
+        "message": "Remove this tab’s changes"
+    },
+    "resetTitle_site": {
+        "message": "Forget this site’s settings"
+    },
+    "resetTitle_global": {
+        "message": "Clear the Everywhere settings"
+    },
+    "resetDone": {
+        "message": "Page restored to its own styles"
+    },
+    "resetNowUsing_tab": {
+        "message": "Now using this tab’s settings"
+    },
+    "resetNowUsing_site": {
+        "message": "Now using this site’s saved settings"
+    },
+    "resetNowUsing_global": {
+        "message": "Now using your Everywhere settings"
+    },
+    "resetSetting": {
+        "message": "Reset $1",
+        "description": "$1 is a setting name such as Font size"
+    },
+    "usePageDefault": {
+        "message": "Use the page’s own value"
+    },
+    "summaryPaused": {
+        "message": "Paused"
+    },
+    "summaryCustom": {
+        "message": "Custom reading settings"
+    },
+    "summaryLine": {
+        "message": "$1× line",
+        "description": "Line height in the summary, e.g. 1.6× line"
+    },
+    "noticeNeedAccess": {
+        "message": "Fontwise needs access to websites to restyle them."
+    },
+    "noticeGrant": {
+        "message": "Allow access"
+    },
+    "noticeRestricted": {
+        "message": "This page can’t be restyled by extensions."
+    },
+    "saveFailed": {
+        "message": "Couldn’t save your change. Try again."
+    },
+    "loadFailed": {
+        "message": "Fontwise couldn’t load its settings. Close and reopen this window."
+    },
+    "presetsLabel": {
+        "message": "Presets"
+    },
+    "presetBest": {
+        "message": "Best for reading"
+    },
+    "presetBestTitle": {
+        "message": "Research-based settings for comfortable reading"
+    },
+    "presetDyslexia": {
+        "message": "Dyslexia-friendly"
+    },
+    "presetDyslexiaTitle": {
+        "message": "Larger, more widely spaced text on a cream background"
+    },
+    "presetNight": {
+        "message": "Night reading"
+    },
+    "presetNightTitle": {
+        "message": "Serif text on a dark background"
+    },
+    "presetApplied": {
+        "message": "$1 applied",
+        "description": "$1 is a preset name"
+    },
+    "myPresets": {
+        "message": "My presets"
+    },
+    "applyPreset": {
+        "message": "Apply “$1”",
+        "description": "$1 is a preset name"
+    },
+    "savePreset": {
+        "message": "Save current"
+    },
+    "savePresetTitle": {
+        "message": "Save the current settings as a preset"
+    },
+    "presetNameLabel": {
+        "message": "Preset name"
+    },
+    "presetNamePlaceholder": {
+        "message": "Name, e.g. Evening news"
+    },
+    "presetSaved": {
+        "message": "Preset “$1” saved",
+        "description": "$1 is a preset name"
+    },
+    "save": {
+        "message": "Save"
+    },
+    "cancel": {
+        "message": "Cancel"
+    },
+    "viewsLabel": {
+        "message": "Sections"
+    },
+    "viewFonts": {
+        "message": "Fonts"
+    },
+    "viewReading": {
+        "message": "Reading"
+    },
+    "searchFonts": {
+        "message": "Search fonts…  ( / )"
+    },
+    "searchFontsLabel": {
+        "message": "Search fonts"
+    },
+    "searchResults": {
+        "message": "$1 fonts found",
+        "description": "$1 is a number"
+    },
+    "filterLabel": {
+        "message": "Font category"
+    },
+    "categoryAll": {
+        "message": "All"
+    },
+    "categorySans": {
+        "message": "Sans-serif"
+    },
+    "categorySerif": {
+        "message": "Serif"
+    },
+    "categoryMono": {
+        "message": "Mono"
+    },
+    "fontListLabel": {
+        "message": "Fonts"
+    },
+    "fontCount": {
+        "message": "$1 fonts",
+        "description": "$1 is a number"
+    },
+    "noFontsMatch": {
+        "message": "No fonts match “$1”",
+        "description": "$1 is the search text"
+    },
+    "noFontsCategory": {
+        "message": "No fonts in this category"
+    },
+    "badgeDefault": {
+        "message": "Default"
+    },
+    "badgeDyslexia": {
+        "message": "Dyslexia"
+    },
+    "badgeBundled": {
+        "message": "Built-in"
+    },
+    "scriptCjk": {
+        "message": "CJK"
+    },
+    "scriptArabic": {
+        "message": "Arabic"
+    },
+    "scriptDevanagari": {
+        "message": "Devanagari"
+    },
+    "scriptHebrew": {
+        "message": "Hebrew"
+    },
+    "rescan": {
+        "message": "Rescan"
+    },
+    "rescanTitle": {
+        "message": "Look for newly installed fonts"
+    },
+    "groupText": {
+        "message": "Text"
+    },
+    "groupColours": {
+        "message": "Colours"
+    },
+    "groupLayout": {
+        "message": "Layout"
+    },
+    "fontSize": {
+        "message": "Font size"
+    },
+    "lineHeight": {
+        "message": "Line spacing"
+    },
+    "letterSpacing": {
+        "message": "Letter spacing"
+    },
+    "wordSpacing": {
+        "message": "Word spacing"
+    },
+    "paragraphSpacing": {
+        "message": "Paragraph spacing"
+    },
+    "fontWeight": {
+        "message": "Weight"
+    },
+    "weightLight": {
+        "message": "Light"
+    },
+    "weightRegular": {
+        "message": "Regular"
+    },
+    "weightMedium": {
+        "message": "Medium"
+    },
+    "weightSemibold": {
+        "message": "Semibold"
+    },
+    "weightBold": {
+        "message": "Bold"
+    },
+    "fontStyle": {
+        "message": "Style"
+    },
+    "styleNormal": {
+        "message": "Normal"
+    },
+    "styleItalic": {
+        "message": "Italic"
+    },
+    "theme": {
+        "message": "Theme"
+    },
+    "themeLight": {
+        "message": "Light"
+    },
+    "themeSepia": {
+        "message": "Sepia"
+    },
+    "themeDark": {
+        "message": "Dark"
+    },
+    "themeContrast": {
+        "message": "Contrast"
+    },
+    "themeCustom": {
+        "message": "Custom"
+    },
+    "textColor": {
+        "message": "Text colour"
+    },
+    "bgColor": {
+        "message": "Background colour"
+    },
+    "pickColour": {
+        "message": "Pick any colour"
+    },
+    "pickTextColour": {
+        "message": "Pick any text colour"
+    },
+    "pickBgColour": {
+        "message": "Pick any background colour"
+    },
+    "colourBlack": {
+        "message": "Black"
+    },
+    "colourInk": {
+        "message": "Ink"
+    },
+    "colourGraphite": {
+        "message": "Graphite"
+    },
+    "colourBrown": {
+        "message": "Brown"
+    },
+    "colourNavy": {
+        "message": "Navy"
+    },
+    "colourSilver": {
+        "message": "Silver"
+    },
+    "colourWhite": {
+        "message": "White"
+    },
+    "colourPaper": {
+        "message": "Paper"
+    },
+    "colourCream": {
+        "message": "Cream"
+    },
+    "colourMint": {
+        "message": "Mint"
+    },
+    "colourSky": {
+        "message": "Sky"
+    },
+    "colourCharcoal": {
+        "message": "Charcoal"
+    },
+    "contrast_AAA": {
+        "message": "Contrast $1:1 — excellent (WCAG AAA)",
+        "description": "$1 is a ratio such as 7.2"
+    },
+    "contrast_AA": {
+        "message": "Contrast $1:1 — good (WCAG AA)",
+        "description": "$1 is a ratio such as 5.1"
+    },
+    "contrast_AA_large": {
+        "message": "Contrast $1:1 — only enough for large text",
+        "description": "$1 is a ratio such as 3.4"
+    },
+    "contrast_fail": {
+        "message": "Contrast $1:1 — too low to read comfortably",
+        "description": "$1 is a ratio such as 2.1"
+    },
+    "lineLength": {
+        "message": "Line length"
+    },
+    "valueCharacters": {
+        "message": "$1 characters",
+        "description": "$1 is a number"
+    },
+    "marginWidth": {
+        "message": "Margin width"
+    },
+    "textAlign": {
+        "message": "Alignment"
+    },
+    "alignLeft": {
+        "message": "Left"
+    },
+    "alignJustify": {
+        "message": "Justify"
+    },
+    "readingRuler": {
+        "message": "Reading ruler"
+    },
+    "readingRulerHint": {
+        "message": "Dims everything but the lines you are reading"
+    },
+    "keepCodeMono": {
+        "message": "Keep code monospace"
+    },
+    "valueDefault": {
+        "message": "Default"
+    },
+    "readerClose": {
+        "message": "Close"
+    },
+    "readerMinutes": {
+        "message": "$1 min read",
+        "description": "$1 is a number of minutes"
+    },
+    "readerNoArticle": {
+        "message": "Focus mode couldn’t find an article on this page."
+    },
+    "skipToContent": {
+        "message": "Skip to content"
+    },
+    "optionsTitle": {
+        "message": "Settings"
+    },
+    "optionsNav": {
+        "message": "Settings sections"
+    },
+    "optGeneral": {
+        "message": "General"
+    },
+    "optGeneralDesc": {
+        "message": "How Fontwise saves and applies your changes."
+    },
+    "optDefaultScope": {
+        "message": "Save new changes for"
+    },
+    "optDefaultScopeHint": {
+        "message": "Used when a page has no saved settings yet. You can switch per page in the popup."
+    },
+    "optSync": {
+        "message": "Sync across devices"
+    },
+    "optSyncHint": {
+        "message": "Syncs preferences, Everywhere settings, excluded sites and presets through your browser account. Per-site settings stay on this device."
+    },
+    "optSyncOn": {
+        "message": "Sync turned on"
+    },
+    "optSyncOff": {
+        "message": "Sync turned off; your settings are now kept on this device"
+    },
+    "optAutoDark": {
+        "message": "Automatic dark colours"
+    },
+    "optAutoDarkHint": {
+        "message": "Switches restyled pages to dark colours at night. Pages you have not restyled are left alone."
+    },
+    "autoDarkOff": {
+        "message": "Off"
+    },
+    "autoDarkSystem": {
+        "message": "Follow system"
+    },
+    "autoDarkSchedule": {
+        "message": "Schedule"
+    },
+    "autoDarkHours": {
+        "message": "Dark hours"
+    },
+    "autoDarkFrom": {
+        "message": "From"
+    },
+    "autoDarkTo": {
+        "message": "To"
+    },
+    "optSites": {
+        "message": "Sites"
+    },
+    "optSitesDesc": {
+        "message": "Settings saved for Everywhere and for individual sites."
+    },
+    "optEverywhere": {
+        "message": "Everywhere"
+    },
+    "optNotSet": {
+        "message": "Not set"
+    },
+    "optClear": {
+        "message": "Clear"
+    },
+    "optConfirmClearGlobal": {
+        "message": "Clear the Everywhere settings? Pages without their own settings will return to normal."
+    },
+    "optRemembered": {
+        "message": "Remembered sites"
+    },
+    "optNoSites": {
+        "message": "No sites remembered yet."
+    },
+    "optForget": {
+        "message": "Forget"
+    },
+    "optForgetSite": {
+        "message": "Forget $1",
+        "description": "$1 is a site name"
+    },
+    "optForgetAll": {
+        "message": "Forget all sites"
+    },
+    "optConfirmForgetAll": {
+        "message": "Forget the settings of every remembered site?"
+    },
+    "optCleared": {
+        "message": "Cleared"
+    },
+    "optExcluded": {
+        "message": "Excluded sites"
+    },
+    "optExcludedHint": {
+        "message": "Everywhere settings never apply on these sites."
+    },
+    "optExcludeLabel": {
+        "message": "Site to exclude"
+    },
+    "optAdd": {
+        "message": "Add"
+    },
+    "optNoExcluded": {
+        "message": "No excluded sites."
+    },
+    "optInvalidSite": {
+        "message": "Enter a site such as example.com"
+    },
+    "optAlreadyExcluded": {
+        "message": "$1 is already excluded",
+        "description": "$1 is a site name"
+    },
+    "optExcludedAdded": {
+        "message": "$1 excluded",
+        "description": "$1 is a site name"
+    },
+    "optRemove": {
+        "message": "Remove"
+    },
+    "optRemoveSite": {
+        "message": "Remove $1",
+        "description": "$1 is a site name"
+    },
+    "optPresets": {
+        "message": "Presets"
+    },
+    "optPresetsDesc": {
+        "message": "Your saved presets. Create one from the popup with “Save current”."
+    },
+    "optNoPresets": {
+        "message": "No presets saved yet."
+    },
+    "optDelete": {
+        "message": "Delete"
+    },
+    "optDeletePreset": {
+        "message": "Delete preset $1",
+        "description": "$1 is a preset name"
+    },
+    "optShortcuts": {
+        "message": "Keyboard shortcuts"
+    },
+    "optShortcutsDesc": {
+        "message": "Work on any web page, even when the popup is closed."
+    },
+    "optShortcutNotSet": {
+        "message": "Not set"
+    },
+    "optChangeShortcuts": {
+        "message": "Change shortcuts"
+    },
+    "optBackup": {
+        "message": "Backup"
+    },
+    "optBackupDesc": {
+        "message": "Export your settings to a file, or restore them on another browser."
+    },
+    "optExport": {
+        "message": "Export settings"
+    },
+    "optExported": {
+        "message": "Settings exported"
+    },
+    "optImport": {
+        "message": "Import settings"
+    },
+    "optImported": {
+        "message": "Imported $1 sites and $2 presets",
+        "description": "$1 and $2 are numbers"
+    },
+    "optImportInvalid": {
+        "message": "That file isn’t a Fontwise backup."
+    },
+    "optImportTooLarge": {
+        "message": "That file is too large to be a Fontwise backup."
+    },
+    "optSaved": {
+        "message": "Saved"
+    },
+    "optError": {
+        "message": "Something went wrong: $1",
+        "description": "$1 is a technical error message"
+    },
+    "optAbout": {
+        "message": "About"
+    },
+    "optVersion": {
+        "message": "Fontwise $1 · MIT licence · Fonts under the SIL Open Font License",
+        "description": "$1 is a version number"
+    },
+    "optSource": {
+        "message": "Source code"
+    },
+    "optReport": {
+        "message": "Report a problem"
+    },
+    "optPrivacy": {
+        "message": "Privacy"
+    },
+    "optWelcome": {
+        "message": "Getting started"
+    },
+    "welcomeTitle": {
+        "message": "Welcome to Fontwise"
+    },
+    "welcomeLead": {
+        "message": "Make any web page easier to read: a better font, comfortable spacing and calm colours, in one click."
+    },
+    "welcomeStep1Title": {
+        "message": "Pin Fontwise"
+    },
+    "welcomeStep1": {
+        "message": "Open the extensions menu (the puzzle icon) and pin Fontwise to the toolbar."
+    },
+    "welcomeStep2Title": {
+        "message": "Open any article"
+    },
+    "welcomeStep2": {
+        "message": "Click the Fontwise icon and choose “Best for reading”, or pick a font and tune the details."
+    },
+    "welcomeStep3Title": {
+        "message": "Choose where it applies"
+    },
+    "welcomeStep3": {
+        "message": "Keep changes to this tab, remember them for the site, or use them everywhere."
+    },
+    "welcomeFeatures": {
+        "message": "What you can do"
+    },
+    "welcomeFeatureFonts": {
+        "message": "Readable fonts you already have, plus Atkinson Hyperlegible, Lexend, Literata and OpenDyslexic built in"
+    },
+    "welcomeFeatureSpacing": {
+        "message": "Size, line, letter, word and paragraph spacing"
+    },
+    "welcomeFeatureColours": {
+        "message": "Light, sepia, dark and high-contrast themes with a contrast check"
+    },
+    "welcomeFeatureFocus": {
+        "message": "Focus mode: just the article, nothing else"
+    },
+    "welcomeFeatureRuler": {
+        "message": "A reading ruler that keeps your place"
+    },
+    "welcomeFeatureDark": {
+        "message": "Automatic dark colours at night"
+    },
+    "welcomePrivacyTitle": {
+        "message": "Private by design"
+    },
+    "welcomePrivacy": {
+        "message": "Fontwise makes no network requests and collects no data. Your settings stay in your browser."
+    },
+    "welcomeGuide": {
+        "message": "Read the guide"
+    }
+}

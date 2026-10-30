@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title data-i18n="optionsTitle">Fontwise settings</title>
+        <link rel="icon" href="../icons/32.png" />
+        <link rel="stylesheet" href="../shared/tokens.css" />
+        <link rel="stylesheet" href="../shared/page.css" />
+    </head>
+
+    <body>
+        <a class="skip-link" href="#main" data-i18n="skipToContent">Skip to content</a>
+
+        <header class="page-header">
+            <div class="page-header-inner">
+                <img class="brand-icon" src="../icons/128.png" alt="" width="36" height="36" />
+                <div>
+                    <p class="brand-title" data-i18n="extName">Fontwise</p>
+                    <p class="brand-sub" data-i18n="optionsTitle">Settings</p>
+                </div>
+                <nav class="page-nav" data-i18n-label="optionsNav">
+                    <a href="#general" data-i18n="optGeneral">General</a>
+                    <a href="#sites" data-i18n="optSites">Sites</a>
+                    <a href="#presets" data-i18n="optPresets">Presets</a>
+                    <a href="#shortcuts" data-i18n="optShortcuts">Shortcuts</a>
+                    <a href="#backup" data-i18n="optBackup">Backup</a>
+                </nav>
+            </div>
+        </header>
+
+        <main id="main" class="page" tabindex="-1">
+            <section id="general" class="card" aria-labelledby="general-title">
+                <h1 id="general-title" class="card-title" data-i18n="optGeneral">General</h1>
+                <p class="card-desc" data-i18n="optGeneralDesc">How Fontwise saves and applies your changes.</p>
+
+                <fieldset class="setting">
+                    <legend class="setting-text">
+                        <span class="setting-label" data-i18n="optDefaultScope">Save new changes for</span>
+                        <span class="setting-hint" data-i18n="optDefaultScopeHint">Used when a page has no saved
+                            settings yet. You can switch per page in the popup.</span>
+                    </legend>
+                    <div class="segmented">
+                        <label><input type="radio" name="defaultScope" value="tab" /><span data-i18n="scopeTab">This
+                                tab</span></label>
+                        <label><input type="radio" name="defaultScope" value="site" /><span data-i18n="scopeSite">This
+                                site</span></label>
+                        <label><input type="radio" name="defaultScope" value="global" /><span
+                                data-i18n="scopeGlobal">Everywhere</span></label>
+                    </div>
+                </fieldset>
+
+                <div class="setting">
+                    <label class="setting-text" for="sync">
+                        <span class="setting-label" data-i18n="optSync">Sync across devices</span>
+                        <span class="setting-hint" data-i18n="optSyncHint">Syncs preferences, Everywhere settings,
+                            excluded sites and presets through your browser account. Per-site settings stay on this
+                            device.</span>
+                    </label>
+                    <span class="switch">
+                        <input id="sync" type="checkbox" role="switch" />
+                        <span class="switch-track" aria-hidden="true"></span>
+                    </span>
+                </div>
+
+                <fieldset class="setting">
+                    <legend class="setting-text">
+                        <span class="setting-label" data-i18n="optAutoDark">Automatic dark colours</span>
+                        <span class="setting-hint" data-i18n="optAutoDarkHint">Switches restyled pages to dark
+                            colours at night. Pages you have not restyled are left alone.</span>
+                    </legend>
+                    <div class="segmented">
+                        <label><input type="radio" name="autoDark" value="off" /><span
+                                data-i18n="autoDarkOff">Off</span></label>
+                        <label><input type="radio" name="autoDark" value="system" /><span
+                                data-i18n="autoDarkSystem">Follow system</span></label>
+                        <label><input type="radio" name="autoDark" value="schedule" /><span
+                                data-i18n="autoDarkSchedule">Schedule</span></label>
+                    </div>
+                </fieldset>
+
+                <div id="schedule" class="setting" hidden>
+                    <span class="setting-text">
+                        <span class="setting-label" data-i18n="autoDarkHours">Dark hours</span>
+                    </span>
+                    <span class="btn-row">
+                        <label><span class="visually-hidden" data-i18n="autoDarkFrom">From</span>
+                            <input id="dark-start" class="time-input" type="time" required /></label>
+                        <span aria-hidden="true">–</span>
+                        <label><span class="visually-hidden" data-i18n="autoDarkTo">To</span>
+                            <input id="dark-end" class="time-input" type="time" required /></label>
+                    </span>
+                </div>
+            </section>
+
+            <section id="sites" class="card" aria-labelledby="sites-title">
+                <h2 id="sites-title" class="card-title" data-i18n="optSites">Sites</h2>
+                <p class="card-desc" data-i18n="optSitesDesc">Settings saved for Everywhere and for individual
+                    sites.</p>
+
+                <h3 class="setting-label" data-i18n="optEverywhere">Everywhere</h3>
+                <div class="setting">
+                    <p id="global-summary" class="setting-text setting-hint"></p>
+                    <button type="button" id="btn-clear-global" class="btn btn-small btn-danger"
+                        data-i18n="optClear">Clear</button>
+                </div>
+
+                <h3 class="setting-label" data-i18n="optRemembered">Remembered sites</h3>
+                <ul id="site-list" class="list" data-i18n-label="optRemembered"></ul>
+                <div class="list-actions">
+                    <button type="button" id="btn-forget-all" class="btn btn-small btn-danger"
+                        data-i18n="optForgetAll">Forget all sites</button>
+                </div>
+
+                <h3 class="setting-label" data-i18n="optExcluded">Excluded sites</h3>
+                <p class="setting-hint" data-i18n="optExcludedHint">Everywhere settings never apply on these
+                    sites.</p>
+                <form id="exclude-form" class="inline-form" novalidate>
+                    <label class="visually-hidden" for="exclude-input" data-i18n="optExcludeLabel">Site to
+                        exclude</label>
+                    <input id="exclude-input" class="text-input" type="text" inputmode="url" autocomplete="off"
+                        spellcheck="false" placeholder="example.com" aria-describedby="exclude-error" />
+                    <button type="submit" class="btn" data-i18n="optAdd">Add</button>
+                </form>
+                <p id="exclude-error" class="field-error" hidden></p>
+                <ul id="excluded-list" class="list spaced" data-i18n-label="optExcluded"></ul>
+            </section>
+
+            <section id="presets" class="card" aria-labelledby="presets-title">
+                <h2 id="presets-title" class="card-title" data-i18n="optPresets">Presets</h2>
+                <p class="card-desc" data-i18n="optPresetsDesc">Your saved presets. Create one from the popup with
+                    “Save current”.</p>
+                <ul id="preset-list" class="list" data-i18n-label="optPresets"></ul>
+            </section>
+
+            <section id="shortcuts" class="card" aria-labelledby="shortcuts-title">
+                <h2 id="shortcuts-title" class="card-title" data-i18n="optShortcuts">Keyboard shortcuts</h2>
+                <p class="card-desc" data-i18n="optShortcutsDesc">Work on any web page, even when the popup is
+                    closed.</p>
+                <dl id="shortcut-list" class="shortcuts"></dl>
+                <div class="btn-row spaced">
+                    <button type="button" id="btn-shortcuts" class="btn btn-small" data-i18n="optChangeShortcuts">Change
+                        shortcuts</button>
+                </div>
+            </section>
+
+            <section id="backup" class="card" aria-labelledby="backup-title">
+                <h2 id="backup-title" class="card-title" data-i18n="optBackup">Backup</h2>
+                <p class="card-desc" data-i18n="optBackupDesc">Export your settings to a file, or restore them on
+                    another browser.</p>
+                <div class="btn-row">
+                    <button type="button" id="btn-export" class="btn" data-i18n="optExport">Export
+                        settings</button>
+                    <button type="button" id="btn-import" class="btn" data-i18n="optImport">Import
+                        settings</button>
+                    <input id="import-file" type="file" accept="application/json,.json" hidden />
+                </div>
+            </section>
+
+            <section class="card" aria-labelledby="about-title">
+                <h2 id="about-title" class="card-title" data-i18n="optAbout">About</h2>
+                <p id="about-version" class="card-desc"></p>
+                <div class="btn-row">
+                    <a class="btn btn-small" href="https://github.com/shaileshhatte/fontwise" target="_blank"
+                        rel="noopener noreferrer" data-i18n="optSource">Source code</a>
+                    <a class="btn btn-small" href="https://github.com/shaileshhatte/fontwise/issues" target="_blank"
+                        rel="noopener noreferrer" data-i18n="optReport">Report a problem</a>
+                    <a class="btn btn-small" href="https://github.com/shaileshhatte/fontwise/blob/main/PRIVACY.md"
+                        target="_blank" rel="noopener noreferrer" data-i18n="optPrivacy">Privacy</a>
+                    <a class="btn btn-small" href="../welcome/welcome.html" data-i18n="optWelcome">Getting
+                        started</a>
+                </div>
+            </section>
+        </main>
+
+        <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+        <script src="../shared/settings.js"></script>
+        <script src="../shared/catalog.js"></script>
+        <script src="../shared/store.js"></script>
+        <script src="../shared/i18n.js"></script>
+        <script src="options.js"></script>
+    </body>
+
+</html>

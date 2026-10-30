@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="280" viewBox="0 0 440 280">
+    <defs>
+        <linearGradient id="page" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#1e1b4b"/>
+            <stop offset="1" stop-color="#0f1117"/>
+        </linearGradient>
+        <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#818cf8"/>
+            <stop offset="0.55" stop-color="#6366f1"/>
+            <stop offset="1" stop-color="#4338ca"/>
+        </linearGradient>
+        <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/>
+            <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+        </linearGradient>
+    </defs>
+
+    <rect width="440" height="280" fill="url(#page)"/>
+    <circle cx="400" cy="30" r="160" fill="#6366f1" fill-opacity="0.12"/>
+
+    <g transform="translate(34 76)">
+        <rect x="0" y="0" width="128" height="128" rx="30" fill="url(#tile)"/>
+        <rect x="0" y="0" width="128" height="128" rx="30" fill="url(#shine)"/>
+        <text x="17" y="58" font-family="Georgia" font-weight="700" font-size="60" fill="#ffffff">A</text>
+        <text x="62" y="58" font-family="Avenir Next" font-weight="600" font-size="52" fill="#e0e7ff">a</text>
+        <rect x="18" y="72" width="64" height="7" rx="3.5" fill="#ffffff" fill-opacity="0.95"/>
+        <rect x="18" y="86" width="64" height="7" rx="3.5" fill="#ffffff" fill-opacity="0.75"/>
+        <rect x="18" y="100" width="42" height="7" rx="3.5" fill="#ffffff" fill-opacity="0.55"/>
+        <g stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+            <line x1="97" y1="74" x2="97" y2="105"/>
+            <polyline points="90,80 97,73 104,80"/>
+            <polyline points="90,99 97,106 104,99"/>
+        </g>
+    </g>
+
+    <text x="188" y="128" font-family="Avenir Next" font-weight="700" font-size="44" fill="#ffffff">Fontwise</text>
+    <text x="190" y="160" font-family="Avenir Next" font-weight="500" font-size="17" fill="#c7d2fe">Readable fonts &amp; reading</text>
+    <text x="190" y="182" font-family="Avenir Next" font-weight="500" font-size="17" fill="#c7d2fe">comfort for any web page</text>
+</svg>
