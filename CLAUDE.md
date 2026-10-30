@@ -44,6 +44,7 @@ tests/unit/                 node:test + node:vm (*.test.js)
 tests/e2e/                  Playwright, Chromium with the extension (*.spec.js)
 tools/vendor-assets.mjs     copies fonts + Readability from node_modules
 tools/store-screenshots.mjs renders the annotated 1280×800 store screenshots into assets/store/screenshots/
+tools/store-video.mjs       renders the 1080p promo video into assets/store/video/ (shares tools/demo-site.mjs)
 assets/                     icon SVG sources, large renders, store artwork (NOT shipped)
 docs/                       ARCHITECTURE.md, PUBLISHING.md
 .github/                    CI (lint, unit, vendor check, build, e2e), tag-triggered release, templates
@@ -57,7 +58,8 @@ npm run lint           # expect 0 errors; known warnings: BACKGROUND_SERVICE_WOR
 npm test               # unit tests
 npm run test:e2e       # Playwright end-to-end tests
 npm run vendor         # refresh extension/fonts, extension/vendor, shared/bundled-fonts.js
-npm run screenshots    # regenerate assets/store/screenshots/ after UI changes (needs Playwright Chromium)
+npm run screenshots    # regenerate assets/store/screenshots/ and the marquee tile after UI changes (needs Playwright Chromium)
+npm run video          # regenerate assets/store/video/ (also needs ffmpeg with libx264, or FFMPEG=/path)
 npm run build          # dist/fontwise-<version>.zip
 npm run start:firefox  # or start:chrome; live-reloading temporary profile
 ```

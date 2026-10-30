@@ -1,102 +1,20 @@
-// Renders the 1280 × 800 store screenshots into assets/store/screenshots/.
+// Renders the 1280 × 800 store screenshots into assets/store/screenshots/ and the 1400 × 560 marquee tile.
 // Captures the real extension in Chromium on a local demo article, then composes annotated slides.
 // Usage: npm run screenshots   (needs `npx playwright install chromium`)
 
 import { chromium } from '@playwright/test';
-import { createServer } from 'node:http';
 import { mkdir, mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { EXTENSION, HOST, ROOT, SITE, launchDemo, settle } from './demo-site.mjs';
 
-const ROOT = fileURLToPath(new URL('..', import.meta.url));
-const EXTENSION = join(ROOT, 'extension');
 const OUT = join(ROOT, 'assets/store/screenshots');
-const HOST = 'dailyledger.example';
-const SITE = `http://${HOST}`;
-
-// Original copy written for these screenshots; the publication is fictional.
-const ARTICLE = {
-  title: 'Why the shape of a page decides how much of it we read',
-  dek: 'Designers have known for a century that line length, spacing and contrast change comprehension. Most of the web still ignores them.',
-  byline: 'By Morgan Ellis',
-  date: 'October 30, 2026',
-  paragraphs: [
-    'Open almost any news site on a laptop and you will meet the same page: small type set across a column wide enough to hold a paragraph on a single line, grey text on a white background, and spacing so tight that the eye slips from one line to the next. None of it is intentional. It is simply what happens when typography is left to defaults.',
-    'Reading researchers have measured the cost for decades. Lines longer than about seventy-five characters make it harder to find the start of the next line, so readers re-read or skip. Generous line spacing reduces those errors, and a comfortable size lowers the effort of decoding each word. The differences sound small, but over a long article they add up to real fatigue.',
-    'For readers with dyslexia, low vision or simply tired eyes, the effect is larger still. Fonts with clearly distinct letter shapes — where a capital I, a lower-case l and the number 1 never look alike — measurably reduce misreadings. Slightly wider letter and word spacing helps the eye separate words that would otherwise blur together.',
-    'Colour matters too. Pure black on bright white can glare at night, while pale grey on white often fails basic contrast guidelines. A warm sepia or a well-balanced dark theme can make the same text easier to read for longer, as long as the contrast between text and background stays high.',
-    'The good news is that none of this requires a redesign. A page that respects a reader’s preferences — their font, their size, their spacing and their colours — becomes readable without anyone else having to change a thing.',
-    'Publishers can still do their part. Sensible defaults, a measured column and real contrast are cheap to provide and benefit everyone. Until then, readers can take matters into their own hands.',
-  ],
-};
-
-const MOST_READ = [
-  'The quiet return of the public library',
-  'What a century of road signs teaches about legibility',
-  'Inside the studio designing type for small screens',
-  'How long should a paragraph be?',
-  'The case for reading on paper, revisited',
-];
-
-const ARTICLE_HTML = `<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="utf-8"><title>${ARTICLE.title}</title>
-<style>
-  body { margin: 0; font: 14px/1.3 "Times New Roman", Times, serif; color: #666; background: #fff; }
-  .masthead { border-bottom: 1px solid #ddd; padding: 14px 32px; display: flex; align-items: baseline; gap: 28px; }
-  .logo { font: 700 26px/1 Georgia, serif; color: #111; letter-spacing: -0.5px; }
-  nav a { font: 13px Arial, sans-serif; color: #333; text-decoration: none; margin-right: 18px; }
-  .wrap { display: flex; gap: 36px; padding: 22px 32px; }
-  article { flex: 1; }
-  h1 { font: 700 30px/1.15 Georgia, serif; color: #111; margin: 6px 0 8px; }
-  .dek { font-size: 17px; color: #444; margin: 0 0 10px; }
-  .meta { font: 12px Arial, sans-serif; color: #888; margin: 0 0 14px; }
-  article p { margin: 0 0 6px; }
-  aside { width: 250px; flex: none; font: 13px Arial, sans-serif; }
-  aside h2 { font: 700 13px Arial, sans-serif; text-transform: uppercase; border-top: 3px solid #111; padding-top: 8px; color: #111; }
-  aside ol { padding-left: 18px; } aside li { margin-bottom: 10px; color: #333; }
-  .ad { height: 250px; background: repeating-linear-gradient(45deg, #f2f2f2 0 10px, #e9e9e9 10px 20px); color: #999;
-        display: grid; place-items: center; font: 11px Arial, sans-serif; margin-bottom: 18px; }
-</style></head>
-<body>
-  <header class="masthead"><span class="logo">The Daily Ledger</span>
-    <nav><a href="/">World</a><a href="/">Business</a><a href="/">Technology</a><a href="/">Ideas</a><a href="/">Culture</a></nav></header>
-  <div class="wrap">
-    <article>
-      <h1>${ARTICLE.title}</h1>
-      <p class="dek">${ARTICLE.dek}</p>
-      <p class="meta">${ARTICLE.byline} · ${ARTICLE.date}</p>
-      ${ARTICLE.paragraphs.map((p) => `<p>${p}</p>`).join('\n      ')}
-    </article>
-    <aside><div class="ad">Advertisement</div><h2>Most read</h2><ol>${MOST_READ.map((t) => `<li>${t}</li>`).join('')}</ol></aside>
-  </div>
-</body>
-</html>`;
-
 
 // ---------------------------------------------------------------------------------------------- capture
 
 /** Captures raw 2× screenshots and the rectangles (CSS px) of the controls the slides point at. */
 async function capture(dir) {
-  const server = createServer((req, res) => {
-    res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
-    res.end(ARTICLE_HTML);
-  });
-  await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
-  const profile = await mkdtemp(join(tmpdir(), 'fontwise-profile-'));
-  const context = await chromium.launchPersistentContext(profile, {
-    channel: 'chromium',
-    deviceScaleFactor: 2,
-    colorScheme: 'light',
-    args: [
-      `--disable-extensions-except=${EXTENSION}`,
-      `--load-extension=${EXTENSION}`,
-      `--host-resolver-rules=MAP ${HOST} 127.0.0.1:${server.address().port}`,
-    ],
-  });
-  const worker = context.serviceWorkers()[0] ?? (await context.waitForEvent('serviceworker'));
-  const extensionId = new URL(worker.url()).host;
+  const { context, worker, extensionId, preset, setSite, newPopupPage, close } = await launchDemo();
   const shots = {};
   const rects = {};
 
@@ -138,22 +56,6 @@ async function capture(dir) {
     }
     await cdp.detach();
   };
-  // Built-in presets with bundled fonts only, so the output does not depend on the fonts installed locally.
-  const preset = (id, patch = {}) =>
-    worker.evaluate(
-      ([presetId, extra]) => {
-        const FW = globalThis.Fontwise;
-        const bundled = (fontId) => FW.FONT_CATALOG.find((f) => f.id === fontId && f.bundled) ?? null;
-        return FW.sanitizeSettings({ ...FW.buildPreset(FW.PRESETS[presetId], bundled), ...extra });
-      },
-      [id, patch],
-    );
-  const setSite = (settings) => worker.evaluate(([k, s]) => chrome.storage.local.set({ [k]: s }), [`fw_site_${HOST}`, settings]);
-  const settle = async (page) => {
-    await page.evaluate(() => document.fonts.ready);
-    await page.waitForTimeout(400);
-  };
-
   const best = await preset('best');
   const sepia = await preset('best', { theme: 'sepia', bgColor: '#f4ecd8', textColor: '#433422', linkColor: '#8a4b08', readingRuler: true });
   const night = await preset('night');
@@ -171,12 +73,7 @@ async function capture(dir) {
   await shot(page, 'page-after');
 
   // Popup, acting on the article tab like the real toolbar popup.
-  const popup = await context.newPage();
-  await popup.setViewportSize({ width: 360, height: 600 });
-  await popup.addInitScript((url) => {
-    const query = chrome.tabs.query.bind(chrome.tabs);
-    chrome.tabs.query = (info) => (info?.active ? query({ url: `${url}/*` }) : query(info));
-  }, SITE);
+  const popup = await newPopupPage();
   const openPopup = async () => {
     await popup.goto(`chrome-extension://${extensionId}/popup/popup.html`);
     await popup.locator('body.ready').waitFor();
@@ -281,9 +178,7 @@ async function capture(dir) {
     backupCard: '#backup',
   });
 
-  await context.close();
-  await new Promise((resolve) => server.close(resolve));
-  await rm(profile, { recursive: true, force: true });
+  await close();
   return { shots, rects };
 }
 
@@ -615,6 +510,38 @@ async function compose(shots, rects) {
     await page.screenshot({ path: file });
     files.push(file);
   }
+
+  // Chrome Web Store marquee promo tile: 1400 × 560, no alpha.
+  await page.setViewportSize({ width: 1400, height: 560 });
+  // The window deliberately bleeds off the bottom edge; the popup sits fully inside the tile.
+  const after = placed(570, 64, 0.62, { x: 0, y: 0, w: 1280, h: 800 });
+  const pop = placed(1400 - 56 - 360 * 0.9, 98, 0.9, { x: 0, y: 0, w: 360, h: 470 });
+  const bigIcon = await dataUrl(join(ROOT, 'assets/icons/icon-256.png'), 'image/png');
+  await page.setContent(`<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><style>
+      @font-face { font-family: Lexend; src: url(${lexend}) format('woff2'); font-weight: 100 900; }
+      ${STYLE}
+      html, body { width: 1400px; height: 560px; }
+      .pitch { position: absolute; left: 70px; top: 0; bottom: 0; width: 470px; display: flex; flex-direction: column; justify-content: center; }
+      .pitch img { width: 96px; height: 96px; border-radius: 22px; box-shadow: 0 20px 50px -10px rgba(99,102,241,.7); }
+      .pitch h1 { margin-top: 26px; font-size: 64px; font-weight: 600; letter-spacing: -1.5px; line-height: 1; }
+      .pitch p { margin-top: 14px; font-size: 25px; line-height: 1.35; font-weight: 300; color: #c7d2fe; }
+      .chips { margin-top: 28px; display: flex; gap: 8px; }
+      .chips span { padding: 7px 14px; border-radius: 999px; font-size: 14.5px; background: rgba(255,255,255,.08);
+                    border: 1px solid rgba(255,255,255,.18); color: #e0e7ff; }
+      .window { box-shadow: 0 40px 80px -20px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.1); }
+      .shot { border-radius: 12px; box-shadow: 0 30px 70px -10px rgba(0,0,0,.7), 0 0 0 1px rgba(0,0,0,.15); }
+    </style></head><body>
+      <div class="pitch"><img src="${bigIcon}" alt=""><h1>Fontwise</h1>
+        <p>Make any web page easier to read</p>
+        <div class="chips"><span>Readable fonts</span><span>Spacing &amp; colours</span><span>Focus mode</span></div></div>
+      ${windowHtml(img['page-after'], size['page-after'], after, icon)}
+      ${shotHtml(img['popup-fonts'], size['popup-fonts'], pop, 12)}
+    </body></html>`, { waitUntil: 'load' });
+  await page.evaluate(() => document.fonts.ready);
+  const marquee = join(ROOT, 'assets/store/promo-marquee-1400x560.png');
+  await page.screenshot({ path: marquee, omitBackground: false });
+  files.push(marquee);
+
   await browser.close();
   return files;
 }

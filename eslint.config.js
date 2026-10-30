@@ -30,8 +30,8 @@ export default [
     languageOptions: { ecmaVersion: 2024, sourceType: 'module', globals: globals.node },
   },
   {
-    // Page and service-worker callbacks in the screenshot tool run in the browser.
-    files: ['tools/store-screenshots.mjs'],
+    // Page and service-worker callbacks in the store artwork tools run in the browser.
+    files: ['tools/demo-site.mjs', 'tools/store-*.mjs'],
     languageOptions: { globals: { ...globals.node, ...globals.browser, ...globals.webextensions } },
   },
   {

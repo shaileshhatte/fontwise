@@ -191,6 +191,7 @@ npm test              # unit tests (node:test)
 npm run test:e2e      # end-to-end tests in Chromium (run `npx playwright install chromium` once)
 npm run vendor        # refresh built-in fonts and Readability from npm
 npm run screenshots   # regenerate the store screenshots in assets/store/screenshots/
+npm run video         # regenerate the promo video in assets/store/video/ (needs ffmpeg)
 npm run start:firefox # launch a temporary Firefox profile with the extension
 npm run start:chrome  # same for Chromium
 npm run build         # dist/fontwise-<version>.zip, ready for every store
@@ -207,7 +208,7 @@ npm run build         # dist/fontwise-<version>.zip, ready for every store
 │   ├── fonts/  vendor/      # vendored by `npm run vendor` (OFL fonts, Readability)
 │   └── icons/
 ├── tests/                   # unit/ (node:test) and e2e/ (Playwright)
-├── tools/                   # vendor-assets.mjs, store-screenshots.mjs
+├── tools/                   # vendor-assets.mjs, store artwork (screenshots, video)
 ├── assets/                  # icon sources and store artwork (not shipped)
 ├── docs/                    # ARCHITECTURE.md, PUBLISHING.md
 └── .github/                 # CI, release workflow, issue/PR templates
