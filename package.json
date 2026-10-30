@@ -27,7 +27,7 @@
     "video": "node tools/store-video.mjs",
         "start:firefox": "web-ext run --target firefox-desktop",
         "start:chrome": "web-ext run --target chromium",
-        "build": "web-ext build"
+        "build": "node tools/build.mjs"
     },
     "webExt": {
         "sourceDir": "extension",

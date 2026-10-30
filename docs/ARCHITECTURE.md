@@ -301,7 +301,7 @@ All overlays are custom elements appended to `<html>`, with a **closed** shadow 
 
 | Decision                                           | Alternatives considered         | Reason                                                                                                       |
 | -------------------------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| One source folder, one manifest                    | Separate Chrome/Firefox builds  | Both accept `service_worker` + `scripts`; nothing to keep in sync.                                           |
+| One source folder, one manifest                    | Separate Chrome/Firefox builds  | One source; `tools/build.mjs` only strips `background.scripts` (rejected by Edge) for the Chromium zip.                                           |
 | Three scopes (tab, site, everywhere)               | Per-tab only; global only       | Matches how people read: one-off, favourite sites, everywhere. Narrowest wins, so overrides are predictable. |
 | Site settings local-only, never in private windows | Sync everything                 | Host names are browsing history; they stay on the device.                                                    |
 | Content script asks the background (`FW_GET`)      | Read `storage.session` directly | Content scripts cannot read session storage by default.                                                      |

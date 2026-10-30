@@ -194,7 +194,7 @@ npm run screenshots   # regenerate the store screenshots in assets/store/screens
 npm run video         # regenerate the promo video in assets/store/video/ (needs ffmpeg)
 npm run start:firefox # launch a temporary Firefox profile with the extension
 npm run start:chrome  # same for Chromium
-npm run build         # dist/fontwise-<version>.zip, ready for every store
+npm run build         # dist/fontwise-<version>-chromium.zip (Chrome, Edge) and -firefox.zip
 ```
 
 ```

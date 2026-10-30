@@ -30,7 +30,7 @@ npx playwright install chromium   # once, for end-to-end tests
 npm run lint       # ESLint + web-ext lint (Mozilla add-on linter)
 npm test           # unit tests (node:test, no browser needed)
 npm run test:e2e   # end-to-end tests in Chromium with the extension loaded
-npm run build      # creates dist/fontwise-<version>.zip
+npm run build      # creates dist/fontwise-<version>-chromium.zip and -firefox.zip
 ```
 
 CI runs all of these on every push and pull request, and also checks that the vendored files match their npm packages.
@@ -166,5 +166,5 @@ See [docs/PUBLISHING.md](docs/PUBLISHING.md) for the full store submission guide
 1. Bump `version` in `extension/manifest.json` (semantic versioning).
 2. Move the *Unreleased* entries in `CHANGELOG.md` under the new version and date.
 3. Run `npm run lint`, `npm test`, `npm run test:e2e`, `npm run build` and the manual test checklist.
-4. Commit, then tag and push: `git tag v<version> && git push origin v<version>`. The *Release* workflow checks that the tag matches the manifest, builds `fontwise-<version>.zip` and attaches it to a GitHub release.
-5. Upload that zip to the Chrome Web Store, Microsoft Edge Add-ons and addons.mozilla.org.
+4. Commit, then tag and push: `git tag v<version> && git push origin v<version>`. The *Release* workflow checks that the tag matches the manifest, builds the Chromium and Firefox zips and attaches them to a GitHub release.
+5. Upload the `-chromium.zip` to the Chrome Web Store and Microsoft Edge Add-ons, and the `-firefox.zip` to addons.mozilla.org.

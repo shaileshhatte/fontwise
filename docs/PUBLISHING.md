@@ -1,6 +1,6 @@
 # Publishing Fontwise
 
-How to release Fontwise to the **Chrome Web Store** (CWS), **Microsoft Edge Add-ons** and **Firefox Add-ons** (AMO). The same zip is uploaded to every store.
+How to release Fontwise to the **Chrome Web Store** (CWS), **Microsoft Edge Add-ons** and **Firefox Add-ons** (AMO). `npm run build` produces two zips from the same source: `-chromium.zip` (Chrome, Edge, Opera) and `-firefox.zip` (AMO). They differ only in the manifest `background` block, because Edge and Chrome reject `background.scripts` in Manifest V3 while Firefox needs it.
 
 ---
 
@@ -11,19 +11,19 @@ How to release Fontwise to the **Chrome Web Store** (CWS), **Microsoft Edge Add-
 - [ ] `npm run lint` passes: 0 errors. Expected warnings: `BACKGROUND_SERVICE_WORKER_IGNORED` and 2× `UNSAFE_VAR_ASSIGNMENT` in the vendored Readability (see [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md)).
 - [ ] `npm test` and `npm run test:e2e` pass.
 - [ ] The [manual test checklist](../CONTRIBUTING.md#manual-test-checklist) passes in Chrome and Firefox.
-- [ ] `npm run build` produced `dist/fontwise-<version>.zip`.
+- [ ] `npm run build` produced `dist/fontwise-<version>-chromium.zip` and `dist/fontwise-<version>-firefox.zip`.
 - [ ] [PRIVACY.md](../PRIVACY.md) is public at <https://github.com/shaileshhatte/fontwise/blob/main/PRIVACY.md>.
 - [ ] GitHub repository settings: description, topics (`browser-extension`, `accessibility`, `readability`, `fonts`, `dyslexia`, `reader-mode`), **Private vulnerability reporting** enabled (Settings → Code security), branch protection on `main` requiring both CI jobs.
 - [ ] Store artwork is ready (see [§5](#5-store-assets)).
 
-Tagging `v<version>` and pushing the tag runs the *Release* workflow. It checks that the tag matches the manifest, builds the zip and attaches it to a GitHub release, so the uploaded package can be traced back to the source.
+Tagging `v<version>` and pushing the tag runs the *Release* workflow. It checks that the tag matches the manifest, builds both zips and attaches them to a GitHub release, so the uploaded package can be traced back to the source.
 
 ---
 
 ## 2. Chrome Web Store
 
 1. Register in the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole) (one-time registration fee).
-2. **Items → New item** and upload `dist/fontwise-<version>.zip`.
+2. **Items → New item** and upload `dist/fontwise-<version>-chromium.zip`.
 3. **Store listing**
    - *Description*: [§6 Full description](#full-description).
    - *Category*: **Accessibility**.
@@ -48,7 +48,7 @@ Broad host access (`http://*/*`, `https://*/*`) can lead to a longer in-depth re
 ## 3. Microsoft Edge Add-ons
 
 1. Register in [Partner Center](https://partner.microsoft.com/dashboard/microsoftedge/overview) (free).
-2. **Create new extension** and upload the same zip.
+2. **Create new extension** and upload `dist/fontwise-<version>-chromium.zip` (not the Firefox zip: Edge rejects `background.scripts`).
 3. *Availability*: Public, all markets.
 4. *Properties*: Category **Accessibility**; privacy policy URL = public `PRIVACY.md`; website and support URLs as above. *Does this extension access, collect or transmit personal information?* **No.**
 5. *Store listing*: reuse the descriptions from [§6](#6-listing-copy), the 128 px store icon, the 440 × 280 promo tile, the screenshots and, optionally, the promo video's YouTube URL.
@@ -61,7 +61,7 @@ Edge also accepts listings from the Chrome Web Store, but publishing in Partner 
 ## 4. Firefox Add-ons (AMO)
 
 1. Sign in to the [Add-on Developer Hub](https://addons.mozilla.org/developers/) (free).
-2. **Submit a New Add-on → On this site** (listed) and upload the zip.
+2. **Submit a New Add-on → On this site** (listed) and upload `dist/fontwise-<version>-firefox.zip`.
 3. Compatibility: **Firefox** and **Firefox for Android** (manifest minimums 140 and 142).
 4. *Do you need to submit source code?* **No.** The package is unminified source with no build step. The vendored files are unmodified copies from npm: `@mozilla/readability` 0.6.0 and the `@fontsource` fonts. See [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
 5. **Listing details**
@@ -77,7 +77,7 @@ Edge also accepts listings from the Chrome Web Store, but publishing in Partner 
 
 The manifest declares `data_collection_permissions: { required: ["none"] }`, so Firefox shows "no data collected" during installation.
 
-Opera ([addons.opera.com](https://addons.opera.com/developer/)) accepts the same zip; use the same listing text if you publish there.
+Opera ([addons.opera.com](https://addons.opera.com/developer/)) accepts the Chromium zip; use the same listing text if you publish there.
 
 ---
 
@@ -207,4 +207,4 @@ The extension makes no network requests and collects no data. Installed-font det
 ## 7. After publishing
 
 - Add the store links to the *Install* section of the [README](../README.md).
-- For updates: bump `version`, update the changelog, tag, and upload the new zip to each dashboard. The stores keep the same listing and id across versions. Never change the Firefox add-on id `fontwise@shailesh-hatte` after the first upload.
+- For updates: bump `version`, update the changelog, tag, and upload the matching zip to each dashboard. The stores keep the same listing and id across versions. Never change the Firefox add-on id `fontwise@shailesh-hatte` after the first upload.

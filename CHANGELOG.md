@@ -5,6 +5,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+### Fixed
+- Microsoft Edge Add-ons rejected the package because `background.scripts` is not allowed in Manifest V3. `npm run build` now produces a Chromium zip without it (Chrome, Edge) and a Firefox zip that keeps it.
+
 ## [1.0.0] - 2026-10-30
 
 Initial release.
